@@ -33,7 +33,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -46,7 +46,9 @@ button {
 /* https://andrew.hedges.name/experiments/aspect_ratio/ */
 
 .item-list {
+  width: 100%;
   display: grid;
+  justify-content: center;
   margin: 48px 0;
   grid-template-columns: repeat(1, 180px);
   grid-column-gap: 76px;
