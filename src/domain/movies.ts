@@ -1,5 +1,6 @@
-import { removeMoreButton, renderMovieList } from "../components/MovieList/movieListHandler";
+import { removeMoreButton, renderMovieList, renderSkeletons } from "../components/MovieList/movieListHandler";
 import { Movie } from "../type";
+import { $ } from "../utils/selector";
 import { fetchMovies } from "./movieApi";
 import Store from "./Store";
 
@@ -12,6 +13,17 @@ interface MovieResult {
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = process.env.API_KEY;
 const store: Store = Store.getInstance();
+
+export const loadNextPage = () => {
+  $(".item-list").insertAdjacentHTML("beforeend", renderSkeletons());
+  store.nextPage();
+
+  if (store.getLastKeyword() === "") {
+    updateMovies();
+  } else {
+    updateMovies(store.getLastKeyword());
+  }
+}
 
 export const updateMovies = async (keyword?: string) => {
   const url = urlBuilder(keyword);
